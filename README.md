@@ -121,6 +121,8 @@ Saat `curl loop` dijalankan kembali, Load Balancer berhasil mengalihkan seluruh 
 Kontainer dihidupkan kembali (`docker start portfolio`), Health Probe kembali bernilai *Healthy*, dan lalu lintas otomatis terbagi kembali secara merata ke 4 VM.
 
 **Screenshot Failover Evidence:**
-![Failover Test Screenshot 1](assets\LoadBalancerError.jpeg)
+![Failover Test Screenshot 1](assets/LoadBalancerError.jpeg)
+
 ![Failover Test Screenshot 2](assets/CurlError.jpeg)
+
 Screenshot diatas menunjukkan jika salah satu vm sudah mati, tetapi vm lain masih bisa diakses melalui Load Balancer.
