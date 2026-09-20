@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="id">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Portofolio</title>
+		<style>
+/* Nord Color Palette */
+:root {
+	--nord0: #2e3440;
+	--nord1: #3b4252;
+	--nord2: #434c5e;
+	--nord3: #4c566a;
+	--nord4: #d8dee9;
+	--nord5: #e5e9f0;
+	--nord6: #eceff4;
+	--nord7: #8fbcbb;
+	--nord8: #88c0d0;
+	--nord9: #81a1c1;
+	--nord10: #5e81ac;
+	--nord11: #bf616a;
+	--nord12: #d08770;
+	--nord13: #ebcb8b;
+	--nord14: #a3be8c;
+	--nord15: #b48ead;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+		body {
+			font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+			background-color: var(--nord0);
+			color: var(--nord4);
+			line-height: 1.6;
+			padding: 2rem 1rem;
+		}
+
+		.container {
+			max-width: 800px;
+			margin: 0 auto;
+		}
+
+		header {
+			margin-bottom: 3rem;
+			border-bottom: 1px solid var(--nord2);
+			padding-bottom: 1.5rem;
+		}
+
+		h1 {
+			color: var(--nord8);
+			font-size: 2.2rem;
+			margin-bottom: 0.5rem;
+		}
+
+		p.subtitle {
+			color: var(--nord9);
+			font-size: 1.1rem;
+		}
+
+		section {
+			margin-bottom: 3rem;
+		}
+
+		h2 {
+			color: var(--nord7);
+			font-size: 1.5rem;
+			margin-bottom: 1rem;
+			display: flex;
+			align-items: center;
+			gap: 0.5rem;
+		}
+
+		.tags {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.5rem;
+			margin-top: 0.5rem;
+		}
+
+		.tag {
+			background-color: var(--nord2);
+			color: var(--nord8);
+			padding: 0.25rem 0.75rem;
+			border-radius: 4px;
+			font-size: 0.875rem;
+			font-weight: 500;
+		}
+
+		.projects-grid {
+			display: grid;
+			grid-template-columns: 1fr;
+			gap: 1.5rem;
+		}
+
+		@media (min-width: 640px) {
+			.projects-grid {
+				grid-template-columns: repeat(2, 1fr);
+			}
+		}
+
+		.card {
+			background-color: var(--nord1);
+			border: 1px solid var(--nord2);
+			border-radius: 8px;
+			padding: 1.25rem;
+			transition: transform 0.2s ease, border-color 0.2s ease;
+		}
+
+		.card:hover {
+			transform: translateY(-2px);
+			border-color: var(--nord8);
+		}
+
+		.card h3 {
+			color: var(--nord6);
+			font-size: 1.15rem;
+			margin-bottom: 0.5rem;
+		}
+
+		.card p {
+			color: var(--nord4);
+			font-size: 0.95rem;
+			margin-bottom: 1rem;
+		}
+
+		.contact-list {
+			list-style: none;
+		}
+
+		.contact-list li {
+			margin-bottom: 0.5rem;
+		}
+
+		a {
+			color: var(--nord8);
+			text-decoration: none;
+			transition: color 0.2s ease;
+		}
+
+		a:hover {
+			color: var(--nord7);
+			text-decoration: underline;
+		}
+
+		footer {
+			margin-top: 4rem;
+			text-align: center;
+			color: var(--nord3);
+			font-size: 0.875rem;
+			border-top: 1px solid var(--nord1);
+			padding-top: 1.5rem;
+		}
+		.image-container {
+			position: relative;
+			width: 300px;
+			height: 400px;
+			background-color: var(--card-bg);
+			border-radius: 16px;
+			box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+			overflow: hidden;
+			/* Smooth return transition when cursor leaves */
+			transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+			will-change: transform;
+		}
+
+		.image-container img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			pointer-events: none; /* Prevents image dragging glitches */
+		}
+		</style>
+	</head>
+	<body>
+
+		<div class="container">
+			<header>
+				<h1 id="greeting">Halo!</h1>
+				<p class="subtitle">Mahasiswa Rekayasa Perangkat Lunak ITS | Software Developer | Robotics Enthusiast</p>
+				<div class="image-container" id="magnetic-image">
+					<img src="./dapa/assets/gw-pas-masih-ganteng.jpg" alt="Avoidance Demo">
+				</div>
+			</header>
+
+			<section id="about">
+				<h2>Tentang Saya</h2>
+				<p>
+				Fokus pada pengembangan perangkat lunak, antarmuka web modern, dan sistem tertanam/robotika.
+				Aktif mengeksplorasi rekayasa perangkat lunak berorientasi objek serta perancangan sistem terstruktur.
+				</p>
+			</section>
+
+			<section id="skills">
+				<h2>Keahlian</h2>
+				<div class="tags">
+					<span class="tag">Next.js / React</span>
+					<span class="tag">TypeScript / JavaScript</span>
+					<span class="tag">C# / .NET</span>
+					<span class="tag">Framer Motion</span>
+					<span class="tag">Tailwind CSS</span>
+					<span class="tag">OOP Design</span>
+					<span class="tag">Robotics</span>
+				</div>
+			</section>
+
+			<section id="projects">
+				<h2>Proyek Terpilih</h2>
+				<div class="projects-grid">
+
+					<div class="card">
+						<h3>Course Scheduling System</h3>
+						<p>Sistem penjadwalan mata kuliah otomatis untuk Departemen Teknik Informatika ITS guna mengoptimalkan alokasi ruang dan waktu.</p>
+						<div class="tags">
+							<span class="tag">Web Dev</span>
+							<span class="tag">Algorithm</span>
+						</div>
+					</div>
+
+					<div class="card">
+						<h3>UI Components & Snap Scroll</h3>
+						<p>Eksperimen komponen antarmuka interaktif menggunakan Next.js, Framer Motion, dan DnD-kit untuk pengalaman pengguna yang intuitif.</p>
+						<div class="tags">
+							<span class="tag">Next.js</span>
+							<span class="tag">Framer Motion</span>
+						</div>
+					</div>
+
+					<div class="card">
+						<h3>Sistem Manajemen OOP (C#)</h3>
+						<p>Kumpulan aplikasi desktop berbasis OOP untuk pengelolaan inventaris buku, kendaraan, perangkat elektronik, dan peralatan olahraga.</p>
+						<div class="tags">
+							<span class="tag">C#</span>
+							<span class="tag">OOP</span>
+						</div>
+					</div>
+
+					<div class="card">
+						<h3>Kontes Robot ABU Indonesia</h3>
+						<p>Riset dan pengembangan sistem kontrol serta mekanik robot untuk kompetisi robotika tingkat nasional.</p>
+						<div class="tags">
+							<span class="tag">Robotics</span>
+							<span class="tag">Embedded Systems</span>
+						</div>
+					</div>
+
+				</div>
+			</section>
+
+			<section id="contact">
+				<h2>Kontak</h2>
+				<ul class="contact-list">
+					<li>Email: <a href="mailto:email@example.com">email@example.com</a></li>
+					<li>GitHub: <a href="https://github.com" target="_blank" rel="noopener">github.com</a></li>
+					<li>LinkedIn: <a href="https://linkedin.com" target="_blank" rel="noopener">linkedin.com</a></li>
+				</ul>
+			</section>
+
+			<footer>
+				<p>&copy; <span id="year"></span> Portofolio. Dibuat dengan tema Nord.</p>
+			</footer>
+		</div>
+
+		<script>
+			// Salam dinamis berdasarkan waktu
+			const hour = new Date().getHours();
+			const greetingEl = document.getElementById('greeting');
+
+			if (hour < 11) {
+				greetingEl.textContent = 'Selamat Pagi!';
+			} else if (hour < 15) {
+				greetingEl.textContent = 'Selamat Siang!';
+			} else if (hour < 18) {
+				greetingEl.textContent = 'Selamat Sore!';
+			} else {
+				greetingEl.textContent = 'Selamat Malam!';
+			}
+
+			// Tahun footer otomatis
+			document.getElementById('year').textContent = new Date().getFullYear();
+			const el = document.getElementById('magnetic-image');
+
+			// Configuration constants
+			const AVOID_RADIUS = 200; // How close the mouse needs to get (in pixels)
+			const PUSH_STRENGTH = 40;  // Maximum distance the image will move away (in pixels)
+
+			window.addEventListener('mousemove', (e) => {
+				// Get the bounding box of the image element
+				const rect = el.getBoundingClientRect();
+
+				// Calculate the center coordinates of the image
+				const elX = rect.left + rect.width / 2;
+				const elY = rect.top + rect.height / 2;
+
+				// Calculate distance between mouse and image center
+				const deltaX = e.clientX - elX;
+				const deltaY = e.clientY - elY;
+				const distance = Math.hypot(deltaX, deltaY);
+
+				// If mouse is within the avoidance radius
+				if (distance < AVOID_RADIUS) {
+					// Calculate the force based on how close the mouse is (closer = stronger push)
+					const force = (AVOID_RADIUS - distance) / AVOID_RADIUS;
+
+					// Calculate angle of movement
+					const angle = Math.atan2(deltaY, deltaX);
+
+					// Calculate the inverse (opposite) translation coordinates
+					const moveX = -Math.cos(angle) * force * PUSH_STRENGTH;
+					const moveY = -Math.sin(angle) * force * PUSH_STRENGTH;
+
+					// Temporarily disable the CSS transition for real-time tracking
+					el.style.transition = 'none';
+					el.style.transform = `translate(${moveX}px, ${moveY}px)`;
+				} else {
+					// Reset position and re-enable smooth spring back transition
+					el.style.transition = 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)';
+					el.style.transform = 'translate(0px, 0px)';
+				}
+			});
+		</script>
+	</body>
+</html>
