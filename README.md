@@ -17,27 +17,7 @@ Proyek ini merupakan tugas akhir untuk *Lab Based Education (LBE) Workshop*. Sis
 ---
 
 ## System Architecture
-```
- Inbound Traffic (HTTP Port 80)
-               │
-               ▼
-┌──────────────────────────────┐
-│  Azure Standard Load Balancer│
-│  (Public IP: 85.211.173.152) │
-└──────────────┬───────────────┘
-               │ Health Probe: Port 8080
-               │ Session Persistence: None
-               │
-   ┌───────────┼───────────┬───────────┐
-   ▼           ▼           ▼           ▼
-┌────────┐  ┌────────┐  ┌────────┐  ┌────────┐
-│VM Daffa│  │VM Sulth│  │VM Dzak │  │VM Erzet│
-│ (8080) │  │ (8080) │  │ (8080) │  │ (8080) │
-└───┬────┘  └───┬────┘  └───┬────┘  └───┬────┘
-    │           │           │           │
- [Docker]    [Docker]    [Docker]    [Docker]
- (Nginx)     (Nginx)     (Nginx)     (Nginx)
-```
+![load balancer](assets/Load%20Balancer.png)
 * **Shared Resource Group & VNet:** Seluruh VM dan Load Balancer berada di dalam satu Resource Group dan Virtual Network yang sama.
 * **Frontend Port:** 80 (Akses HTTP Publik).
 * **Backend Port:** 8080 (Mapped ke Port 80 Nginx di dalam Docker Container).
@@ -109,36 +89,16 @@ Pengujian distribusi lalu lintas dilakukan menggunakan metode **Curl Loop** dari
 ### Execution Command
 
 ```bash
-for i in $(seq 1 12); do
-    curl -s -H "Connection: close" [http://85.211.173.152/](http://85.211.173.152/)
-    echo ""
+for i in $(seq 1 52); do     
+    curl -s -H "Connection: close" http://85.211.173.152/config.js;     
+    echo ""; 
 done
 
 ```
 
 ### Output Result
 
-> *Ganti/Sesuaikan blok teks di bawah ini sesuai dengan output asli terminal saat kamu mengeksekusi script curl loop di laptop:*
-
-```text
-Request 1  : Served by VM -> daffa   (Response: Welcome to Daffa's Portfolio)
-Request 2  : Served by VM -> sulthan (Response: Welcome to Sulthan's Portfolio)
-Request 3  : Served by VM -> dzakwan (Response: Welcome to Dzakwan's Portfolio)
-Request 4  : Served by VM -> erzeth  (Response: Welcome to Erzeth's Portfolio)
-Request 5  : Served by VM -> daffa   (Response: Welcome to Daffa's Portfolio)
-Request 6  : Served by VM -> sulthan (Response: Welcome to Sulthan's Portfolio)
-Request 7  : Served by VM -> dzakwan (Response: Welcome to Dzakwan's Portfolio)
-Request 8  : Served by VM -> erzeth  (Response: Welcome to Erzeth's Portfolio)
-Request 9  : Served by VM -> daffa   (Response: Welcome to Daffa's Portfolio)
-Request 10 : Served by VM -> sulthan (Response: Welcome to Sulthan's Portfolio)
-Request 11 : Served by VM -> dzakwan (Response: Welcome to Dzakwan's Portfolio)
-Request 12 : Served by VM -> erzeth  (Response: Welcome to Erzeth's Portfolio)
-
-```
-
-> **Screenshot Evidence:**
-> *(Tempelkan/Upload gambar screenshot terminal hasil curl loop di folder repository, lalu panggil di sini)*
-> `![Curl Loop Terminal Screenshot](./screenshots/curl-loop.png)`
+![Curl Loop Terminal Screenshot](assets/Curl.jpeg)
 
 ---
 
@@ -160,17 +120,7 @@ Saat `curl loop` dijalankan kembali, Load Balancer berhasil mengalihkan seluruh 
 4. **Recovery Verification:**
 Kontainer dihidupkan kembali (`docker start portfolio`), Health Probe kembali bernilai *Healthy*, dan lalu lintas otomatis terbagi kembali secara merata ke 4 VM.
 
-> **Screenshot Failover Evidence:**
-> `![Failover Test Screenshot](./screenshots/failover-test.png)`
-
-```
-
----
-
-### Catatan untuk Tempat Screenshot yang Perlu Kamu Sediakan:
-
-Kamu memerlukan **2–3 screenshot** (opsional tapi akan membuat laporan terlihat mantap):
-
-1. **Screenshot Output Curl Loop Terminal:** Masukkan ke dalam folder `screenshots/curl-loop.png` di GitHub.
-2. **Screenshot Azure Portal (Backend Pool & Health Probe):** Menampilkan status backend pool yang menunjukkan ke-4 VM dalam kondisi *Healthy 100%*.
-3. **Screenshot Failover Test (Opsional):** Menampilkan hasil *curl loop* saat salah satu kontainer di-stop.
+**Screenshot Failover Evidence:**
+![Failover Test Screenshot 1](assets\LoadBalancerError.jpeg)
+![Failover Test Screenshot 2](assets/CurlError.jpeg)
+Screenshot diatas menunjukkan jika salah satu vm sudah mati, tetapi vm lain masih bisa diakses melalui Load Balancer.
