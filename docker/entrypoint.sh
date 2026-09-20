@@ -12,5 +12,8 @@ else
     echo "Folder /app/site_$TARGET_MEMBER/src tidak ditemukan!"
 fi
 
-# Jalankan Nginx secara normal
 exec nginx -g 'daemon off;'
+
+HOSTNAME_VAL=$(hostname)
+
+echo "halo.dek = { hostname: \"${HOSTNAME_VAL}\" };" > /var/www/html/config.js
