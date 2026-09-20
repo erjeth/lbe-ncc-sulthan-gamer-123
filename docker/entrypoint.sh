@@ -12,7 +12,6 @@ else
     echo "Folder /app/site_$TARGET_MEMBER/src tidak ditemukan!"
 fi
 
-HOSTNAME_VAL=$(whoami)
-echo "halo.dek = { hostname: \"${HOSTNAME_VAL}\" };" > /usr/share/nginx/html/config.js
+echo "halo.dek = { hostname: \"${TARGET_MEMBER}\" };" > /usr/share/nginx/html/config.js
 
 exec nginx -g 'daemon off;'
