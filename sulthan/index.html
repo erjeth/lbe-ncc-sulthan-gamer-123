@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sulthan Zakinun Nasywa - Software Engineering Portfolio</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent-color: #38bdf8;
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 0 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            color: var(--accent-color);
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .social-links a {
+            color: var(--accent-color);
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+
+        .social-links a:hover {
+            text-decoration: underline;
+        }
+
+        section {
+            margin: 32px 0;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            border-left: 4px solid var(--accent-color);
+            padding-left: 12px;
+            margin-bottom: 16px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+        }
+
+        .card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: var(--accent-color);
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .tag {
+            background-color: rgba(56, 189, 248, 0.1);
+            color: var(--accent-color);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .interactive-section {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        button {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 12px;
+            transition: opacity 0.2s;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Sulthan Zakinun Nasywa</h1>
+            <p class="subtitle">Software Engineering Student @ ITS (Class of 2025) | NRP: 5053251008</p>
+            <div class="social-links">
+                <a href="https://github.com/sulthanjr12-rgb" target="_blank">GitHub</a>
+            </div>
+        </header>
+
+        <section>
+            <h2>About Me</h2>
+            <p>Mahasiswa Teknik Informatika Institut Teknologi Sepuluh Nopember (ITS) yang berfokus pada pengembangan perangkat lunak, struktur data, dan teknologi berorientasi jaringan. Aktif mendalami lingkungan Windows/Linux (WSL2), alur kerja Cloud, serta arsitektur backend modern.</p>
+        </section>
+
+        <section>
+            <h2>Focus & Tech Stack</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Languages & Concepts</h3>
+                    <p>C, C++, C# (OOP Concepts, Interfaces, Unit Testing), Numerical Methods algorithms.</p>
+                </div>
+                <div class="card">
+                    <h3>Environment & Cloud</h3>
+                    <p>WSL2 (Ubuntu 24.04 LTS), Azure Virtual Machines, Docker, Git, SSH Configuration.</p>
+                </div>
+                <div class="card">
+                    <h3>Lab & Activities</h3>
+                    <p>Net Centric Computing (NCC) Lab (LBE Program), System Design & Documentation (BPMN, Use Cases).</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Featured Focus Area</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Net Centric Computing (NCC)</h3>
+                    <p>Pengelolaan infrastruktur virtual berbasis Azure VM, kontainerisasi dengan Docker, dan konfigurasi lingkungan pengembang di WSL2.</p>
+                    <div class="tags">
+                        <span class="tag">Docker</span>
+                        <span class="tag">Azure</span>
+                        <span class="tag">WSL2</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>Article Quality Management System (AQMS)</h3>
+                    <p>Perancangan sistem perangkat lunak mencakup spesifikasi Use Case, alur proses bisnis (BPMN), dan pemetaan proposisi nilai.</p>
+                    <div class="tags">
+                        <span class="tag">System Analysis</span>
+                        <span class="tag">BPMN</span>
+                        <span class="tag">Use Case</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Quick Interest Toggle</h2>
+            <div class="interactive-section">
+                <p id="interest-text">Klik tombol di bawah untuk melihat fokus pengembangan utama saat ini!</p>
+                <button onclick="toggleInterest()">Ganti Fokus</button>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 Sulthan Zakinun Nasywa. Built with simple HTML, CSS, and JS.</p>
+        </footer>
+    </div>
+
+    <script>
+        const interests = [
+            "Fokus Backend & Cloud Architecture: Mengelola Azure VM & Docker di NCC Lab.",
+            "Struktur Data & Algoritma: Penguasaan C/C++ (BST, Heaps, Graph Search).",
+            "Software Engineering & System Design: Perancangan BPMN & spesifikasi Use Case."
+        ];
+        let index = 0;
+
+        function toggleInterest() {
+            index = (index + 1) % interests.length;
+            document.getElementById('interest-text').innerText = interests[index];
+        }
+    </script>
+</body>
+</html>
