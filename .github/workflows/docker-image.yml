@@ -29,5 +29,5 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/your-image-name:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/your-image-name:${{ github.sha }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/portfolio-app:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/porfolio-app:${{ github.sha }}
