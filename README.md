@@ -17,7 +17,7 @@ Proyek ini merupakan tugas akhir untuk *Lab Based Education (LBE) Workshop*. Sis
 ---
 
 ## System Architecture
-![load balancer](assets/Load%20Balancer.png)
+![load balancer](docs/healthy-backend-pool.png)
 * **Shared Resource Group & VNet:** Seluruh VM dan Load Balancer berada di dalam satu Resource Group dan Virtual Network yang sama.
 * **Frontend Port:** 80 (Akses HTTP Publik).
 * **Backend Port:** 8080 (Mapped ke Port 80 Nginx di dalam Docker Container).
@@ -32,24 +32,32 @@ Aplikasi menggunakan pendekatan **Unified Docker Image** yang dinamis. Satu imag
 ### Repository Structure
 ```text
 .
-├── docker
+├── app
 │   ├── Dockerfile
-│   └── entrypoint.sh
-├── README.md
-├── site_daffa
+│   ├── entrypoint.sh
 │   └── src
-│       └── index.html
-├── site_dzakwan
-│   └── src
-│       └── index.html
-├── site_erzeth
-│   └── src
-│       ├── index.html
-│       ├── script.js
-│       └── style.css
-└── site_sulthan
-    └── src
-        └── index.html
+│       ├── daffa
+│       │   ├── assets
+│       │   │   └── gw-pas-masih-ganteng.jpg
+│       │   └── src
+│       │       └── index.html
+│       ├── dzakwan
+│       │   └── src
+│       │       └── index.html
+│       ├── erzeth
+│       │   └── src
+│       │       ├── index.html
+│       │       ├── script.js
+│       │       └── style.css
+│       └── sulthan
+│           └── src
+│               └── index.html
+├── docs
+│   ├── healthy-backend-pool.png
+│   ├── healthy-curl-loop-output.jpeg
+│   ├── one-vm-down-backend-pool.jpeg
+│   └── one-vm-down-curl-loop-output.jpeg
+└── README.md
 ```
 
 ### Build & Offline Distribution Steps
@@ -75,7 +83,6 @@ scp ~/portfolio-app.tar erzeth@10.0.0.4:~/
 ```bash
 docker load -i ~/portfolio-app.tar
 docker run -d --name portfolio -p 8080:80 -e MEMBER_NAME=$(whoami) portfolio-app
-
 ```
 
 
@@ -98,7 +105,7 @@ done
 
 ### Output Result
 
-![Curl Loop Terminal Screenshot](assets/Curl.jpeg)
+![Curl Loop Terminal Screenshot](docs/healthy-curl-loop-output.jpeg)
 
 ---
 
@@ -109,7 +116,6 @@ Pengujian keandalan infrastruktur dilakukan dengan cara mematikan kontainer seca
 1. **Stop Container di `vm-dzakwan`:**
 ```bash
 docker stop portfolio
-
 ```
 
 
@@ -121,8 +127,8 @@ Saat `curl loop` dijalankan kembali, Load Balancer berhasil mengalihkan seluruh 
 Kontainer dihidupkan kembali (`docker start portfolio`), Health Probe kembali bernilai *Healthy*, dan lalu lintas otomatis terbagi kembali secara merata ke 4 VM.
 
 **Screenshot Failover Evidence:**
-![Failover Test Screenshot 1](assets/LoadBalancerError.jpeg)
+![Failover Test Screenshot 1](docs/one-vm-down-backend-pool.jpeg)
 
-![Failover Test Screenshot 2](assets/CurlError.jpeg)
+![Failover Test Screenshot 2](docs/one-vm-down-curl-loop-output.jpeg)
 
 Screenshot diatas menunjukkan jika salah satu vm sudah mati, tetapi vm lain masih bisa diakses melalui Load Balancer.
