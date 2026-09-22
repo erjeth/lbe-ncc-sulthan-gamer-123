@@ -1,326 +1,355 @@
 <!DOCTYPE html>
-<html lang="id">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Portofolio</title>
-		<style>
-/* Nord Color Palette */
-:root {
-	--nord0: #2e3440;
-	--nord1: #3b4252;
-	--nord2: #434c5e;
-	--nord3: #4c566a;
-	--nord4: #d8dee9;
-	--nord5: #e5e9f0;
-	--nord6: #eceff4;
-	--nord7: #8fbcbb;
-	--nord8: #88c0d0;
-	--nord9: #81a1c1;
-	--nord10: #5e81ac;
-	--nord11: #bf616a;
-	--nord12: #d08770;
-	--nord13: #ebcb8b;
-	--nord14: #a3be8c;
-	--nord15: #b48ead;
-}
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Software Engineer</title>
+<style>
+  :root{
+    --nord0:#2e3440; --nord1:#3b4252; --nord2:#434c5e; --nord3:#4c566a;
+    --nord4:#d8dee9; --nord5:#e5e9f0; --nord6:#eceff4;
+    --nord7:#8fbcbb; --nord8:#88c0d0; --nord9:#81a1c1; --nord10:#5e81ac;
+    --nord11:#bf616a; --nord12:#d08770; --nord13:#ebcb8b; --nord14:#a3be8c; --nord15:#b48ead;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--nord0);
+    color:var(--nord5);
+    font-family:'Segoe UI', system-ui, -apple-system, sans-serif;
+    overflow-x:hidden;
+    line-height:1.6;
+  }
+  ::selection{background:var(--nord8); color:var(--nord0);}
 
-* {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
-}
+  /* Background aurora effect */
+  .aurora{
+    position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden;
+  }
+  .aurora span{
+    position:absolute; border-radius:50%; filter:blur(90px); opacity:.28;
+    animation:float 18s ease-in-out infinite;
+  }
+  .aurora span:nth-child(1){width:420px; height:420px; background:var(--nord8); top:-10%; left:-8%; animation-duration:22s;}
+  .aurora span:nth-child(2){width:360px; height:360px; background:var(--nord15); top:40%; right:-10%; animation-duration:26s; animation-delay:2s;}
+  .aurora span:nth-child(3){width:300px; height:300px; background:var(--nord14); bottom:-12%; left:20%; animation-duration:20s; animation-delay:4s;}
+  .aurora span:nth-child(4){width:260px; height:260px; background:var(--nord9); top:10%; right:25%; animation-duration:24s; animation-delay:1s;}
+  @keyframes float{
+    0%,100%{transform:translate(0,0) scale(1);}
+    50%{transform:translate(40px,-30px) scale(1.1);}
+  }
 
-		body {
-			font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-			background-color: var(--nord0);
-			color: var(--nord4);
-			line-height: 1.6;
-			padding: 2rem 1rem;
-		}
+  header, main, footer{position:relative; z-index:1;}
 
-		.container {
-			max-width: 800px;
-			margin: 0 auto;
-		}
+  /* Nav */
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:10;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:18px 6%; backdrop-filter:blur(10px);
+    background:rgba(46,52,64,0.6); border-bottom:1px solid rgba(216,222,233,0.08);
+  }
+  .logo{font-weight:700; letter-spacing:1px; color:var(--nord8); font-size:1.2rem;}
+  .logo span{color:var(--nord14);}
+  nav ul{list-style:none; display:flex; gap:32px;}
+  nav a{color:var(--nord4); text-decoration:none; font-size:.95rem; transition:color .25s;}
+  nav a:hover{color:var(--nord8);}
+  .nav-toggle{display:none; flex-direction:column; gap:5px; cursor:pointer;}
+  .nav-toggle div{width:24px; height:2px; background:var(--nord5);}
 
-		header {
-			margin-bottom: 3rem;
-			border-bottom: 1px solid var(--nord2);
-			padding-bottom: 1.5rem;
-		}
+  /* Hero */
+  .hero{
+    min-height:100vh; display:flex; flex-direction:column;
+    justify-content:center; align-items:flex-start;
+    padding:0 6%; max-width:900px;
+  }
+  .hero .tag{
+    color:var(--nord8); font-family:monospace; letter-spacing:2px;
+    text-transform:uppercase; font-size:.85rem; margin-bottom:16px;
+    opacity:0; animation:fadeUp .8s ease forwards .1s;
+  }
+  .hero h1{
+    font-size:clamp(2.2rem, 6vw, 4.2rem); font-weight:800; line-height:1.15;
+    color:var(--nord6);
+    opacity:0; animation:fadeUp .8s ease forwards .3s;
+  }
+  .hero h1 .accent{
+    background:linear-gradient(90deg, var(--nord8), var(--nord14));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .hero p{
+    margin-top:20px; max-width:600px; color:var(--nord4); font-size:1.05rem;
+    opacity:0; animation:fadeUp .8s ease forwards .5s;
+  }
+  .hero .cta{
+    margin-top:32px; display:flex; gap:16px; flex-wrap:wrap;
+    opacity:0; animation:fadeUp .8s ease forwards .7s;
+  }
+  .btn{
+    padding:12px 26px; border-radius:8px; font-weight:600; font-size:.95rem;
+    text-decoration:none; transition:transform .2s, box-shadow .2s; display:inline-block;
+    border:1px solid transparent; cursor:pointer;
+  }
+  .btn-primary{background:var(--nord8); color:var(--nord0);}
+  .btn-primary:hover{transform:translateY(-3px); box-shadow:0 10px 25px rgba(136,192,208,.3);}
+  .btn-outline{border-color:var(--nord3); color:var(--nord5); background:transparent;}
+  .btn-outline:hover{border-color:var(--nord8); color:var(--nord8); transform:translateY(-3px);}
+  @keyframes fadeUp{ from{opacity:0; transform:translateY(24px);} to{opacity:1; transform:translateY(0);} }
 
-		h1 {
-			color: var(--nord8);
-			font-size: 2.2rem;
-			margin-bottom: 0.5rem;
-		}
+  .scroll-hint{
+    position:absolute; bottom:36px; left:6%; font-family:monospace; font-size:.8rem;
+    color:var(--nord3); display:flex; align-items:center; gap:8px;
+  }
+  .scroll-hint::before{
+    content:''; width:20px; height:32px; border:2px solid var(--nord3); border-radius:10px;
+    display:inline-block; position:relative;
+  }
 
-		p.subtitle {
-			color: var(--nord9);
-			font-size: 1.1rem;
-		}
+  section{padding:110px 6%; max-width:1200px; margin:0 auto;}
+  .section-title{
+    display:flex; align-items:center; gap:16px; margin-bottom:50px;
+  }
+  .section-title .num{ color:var(--nord8); font-family:monospace; font-size:1.1rem;}
+  .section-title h2{ font-size:1.9rem; color:var(--nord6); font-weight:700;}
+  .section-title::after{
+    content:''; flex:1; height:1px; background:linear-gradient(90deg, var(--nord3), transparent);
+  }
 
-		section {
-			margin-bottom: 3rem;
-		}
+  .reveal{opacity:0; transform:translateY(30px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.visible{opacity:1; transform:translateY(0);}
 
-		h2 {
-			color: var(--nord7);
-			font-size: 1.5rem;
-			margin-bottom: 1rem;
-			display: flex;
-			align-items: center;
-			gap: 0.5rem;
-		}
+  /* About */
+  .about-grid{display:grid; grid-template-columns:1.2fr 1fr; gap:60px; align-items:start;}
+  .about-grid p{color:var(--nord4); margin-bottom:16px;}
+  .about-grid .highlight{color:var(--nord8); font-weight:600;}
+  .stack-card{
+    background:var(--nord1); border:1px solid var(--nord2); border-radius:14px; padding:26px;
+  }
+  .stack-card h3{color:var(--nord13); margin-bottom:16px; font-size:1rem; letter-spacing:1px; text-transform:uppercase;}
+  .chips{display:flex; flex-wrap:wrap; gap:10px;}
+  .chip{
+    background:var(--nord2); color:var(--nord6); padding:7px 14px; border-radius:20px;
+    font-size:.85rem; border:1px solid var(--nord3); transition:all .2s;
+  }
+  .chip:hover{ background:var(--nord10); border-color:var(--nord10); transform:translateY(-2px);}
 
-		.tags {
-			display: flex;
-			flex-wrap: wrap;
-			gap: 0.5rem;
-			margin-top: 0.5rem;
-		}
+  /* Projects */
+  .projects-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:28px;}
+  .project-card{
+    background:var(--nord1); border:1px solid var(--nord2); border-radius:16px;
+    padding:30px; position:relative; overflow:hidden; transition:transform .35s, border-color .35s;
+  }
+  .project-card::before{
+    content:''; position:absolute; top:0; left:0; right:0; height:3px;
+    background:linear-gradient(90deg, var(--accent1,var(--nord8)), var(--accent2,var(--nord14)));
+    transform:scaleX(0); transform-origin:left; transition:transform .4s;
+  }
+  .project-card:hover{transform:translateY(-8px); border-color:var(--nord3);}
+  .project-card:hover::before{transform:scaleX(1);}
+  .project-tag{
+    display:inline-block; font-family:monospace; font-size:.75rem; letter-spacing:1px;
+    color:var(--nord0); background:var(--accent1,var(--nord8)); padding:4px 10px; border-radius:6px;
+    margin-bottom:16px; font-weight:700; text-transform:uppercase;
+  }
+  .project-card h3{color:var(--nord6); font-size:1.25rem; margin-bottom:10px;}
+  .project-card p{color:var(--nord4); font-size:.95rem; margin-bottom:18px;}
+  .project-tools{display:flex; flex-wrap:wrap; gap:8px;}
+  .project-tools span{
+    font-size:.75rem; color:var(--nord9); border:1px solid var(--nord3); padding:3px 10px;
+    border-radius:12px; font-family:monospace;
+  }
 
-		.tag {
-			background-color: var(--nord2);
-			color: var(--nord8);
-			padding: 0.25rem 0.75rem;
-			border-radius: 4px;
-			font-size: 0.875rem;
-			font-weight: 500;
-		}
+  /* Contact */
+  .contact-box{
+    background:linear-gradient(135deg, var(--nord1), var(--nord2));
+    border-radius:20px; padding:60px 6%; text-align:center; border:1px solid var(--nord3);
+  }
+  .contact-box h2{font-size:2rem; color:var(--nord6); margin-bottom:16px;}
+  .contact-box p{color:var(--nord4); max-width:500px; margin:0 auto 30px;}
+  .contact-links{display:flex; gap:20px; justify-content:center; flex-wrap:wrap;}
 
-		.projects-grid {
-			display: grid;
-			grid-template-columns: 1fr;
-			gap: 1.5rem;
-		}
+  footer{
+    text-align:center; padding:36px 6%; color:var(--nord3); font-size:.85rem;
+    border-top:1px solid var(--nord2);
+  }
+  footer a{color:var(--nord8); text-decoration:none;}
 
-		@media (min-width: 640px) {
-			.projects-grid {
-				grid-template-columns: repeat(2, 1fr);
-			}
-		}
+  @media(max-width:800px){
+    .about-grid{grid-template-columns:1fr;}
+    nav ul{
+      position:fixed; top:64px; right:0; background:var(--nord1); flex-direction:column;
+      width:220px; padding:20px; border-radius:0 0 0 12px; gap:18px;
+      transform:translateX(110%); transition:transform .3s; border:1px solid var(--nord2);
+    }
+    nav ul.open{transform:translateX(0);}
+    .nav-toggle{display:flex;}
+  }
+</style>
+</head>
+<body>
 
-		.card {
-			background-color: var(--nord1);
-			border: 1px solid var(--nord2);
-			border-radius: 8px;
-			padding: 1.25rem;
-			transition: transform 0.2s ease, border-color 0.2s ease;
-		}
+<div class="aurora"><span></span><span></span><span></span><span></span></div>
 
-		.card:hover {
-			transform: translateY(-2px);
-			border-color: var(--nord8);
-		}
+<nav>
+  <div class="logo">daffa<span>.portfolio</span></div>
+  <ul id="navMenu">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-toggle" id="navToggle"><div></div><div></div><div></div></div>
+</nav>
 
-		.card h3 {
-			color: var(--nord6);
-			font-size: 1.15rem;
-			margin-bottom: 0.5rem;
-		}
+<header class="hero">
+  <div class="tag">// software engineering student</div>
+  <h1>Building systems that <span class="accent">see, move,</span><br> and coordinate.</h1>
+  <p>I work across competitive robotics, embedded perception, and full-stack app development — from ROS2 pipelines and computer vision to Android tools and real-time scouting systems built for the field, not just the lab.</p>
+  <div class="cta">
+    <a href="#projects" class="btn btn-primary">View Projects</a>
+    <a href="#contact" class="btn btn-outline">Get in Touch</a>
+  </div>
+  <div class="scroll-hint">scroll</div>
+</header>
 
-		.card p {
-			color: var(--nord4);
-			font-size: 0.95rem;
-			margin-bottom: 1rem;
-		}
+<main>
+  <section id="about">
+    <div class="section-title reveal"><span class="num">01</span><h2>About</h2></div>
+    <div class="about-grid">
+      <div class="reveal">
+        <p>I'm a student working at the intersection of <span class="highlight">robotics competition engineering</span>, <span class="highlight">Android development</span>, and <span class="highlight">systems-level programming</span>. My work spans YOLO-based perception pipelines, ROS2 + Unity integration, real-time WebSocket architectures, and Kotlin apps built for high-pressure competition environments.</p>
+        <p>I gravitate toward problems that reward <span class="highlight">structural and strategic analysis</span> over quick fixes — whether that's reverse-engineering a joystick command bitmask, designing an event-log database schema for a match scouting app, or working out rule-exploitation strategy for a robotics competition ruleset.</p>
+        <p>Outside of competition work, I also build tools for coursework and everyday problems — from numerical methods solvers to interactive algorithm visualizations.</p>
+      </div>
+      <div class="stack-card reveal">
+        <h3>Core Toolkit</h3>
+        <div class="chips">
+          <span class="chip">Kotlin</span>
+          <span class="chip">C++</span>
+          <span class="chip">Python</span>
+          <span class="chip">TypeScript</span>
+          <span class="chip">ROS2</span>
+          <span class="chip">Unity</span>
+          <span class="chip">Android</span>
+          <span class="chip">Next.js</span>
+          <span class="chip">WebSockets</span>
+          <span class="chip">SQLite</span>
+          <span class="chip">YOLO / CV</span>
+          <span class="chip">Competitive Programming</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-		.contact-list {
-			list-style: none;
-		}
+  <section id="projects">
+    <div class="section-title reveal"><span class="num">02</span><h2>Selected Projects</h2></div>
+    <div class="projects-grid">
 
-		.contact-list li {
-			margin-bottom: 0.5rem;
-		}
+      <div class="project-card reveal" style="--accent1:var(--nord8); --accent2:var(--nord10);">
+        <span class="project-tag" style="background:var(--nord8);">Computer Vision · Robotics</span>
+        <h3>Robocon 2026 — "Kung Fu Quest"</h3>
+        <p>Perception and strategy systems for ABU Robocon's competitive robot. Trained a YOLO-based detector for occluded scroll targets, built a Unity + ROS2 camera pipeline (MJPEG snapshot streaming with server-side rotation baked into shader transforms), and debugged low-level joystick command bitmasking for combo-input detection.</p>
+        <div class="project-tools">
+          <span>ROS2</span><span>Unity</span><span>YOLO</span><span>C++</span>
+        </div>
+      </div>
 
-		a {
-			color: var(--nord8);
-			text-decoration: none;
-			transition: color 0.2s ease;
-		}
+      <div class="project-card reveal" style="--accent1:var(--nord14); --accent2:var(--nord8);">
+        <span class="project-tag" style="background:var(--nord14);">Full-Stack · Real-Time Systems</span>
+        <h3>Robocon 2027 — Match Scouting App</h3>
+        <p>Designing a live timer and scouting system for tracking robot performance metrics mid-match — zone transit times, handling times, malfunction recovery — across four concurrent observers. Built on Next.js + WebSockets with a local-server architecture and an append-only event-log database for full match replay.</p>
+        <div class="project-tools">
+          <span>Next.js</span><span>TypeScript</span><span>WebSockets</span><span>SQLite</span>
+        </div>
+      </div>
 
-		a:hover {
-			color: var(--nord7);
-			text-decoration: underline;
-		}
+      <div class="project-card reveal" style="--accent1:var(--nord15); --accent2:var(--nord9);">
+        <span class="project-tag" style="background:var(--nord15);">IoT · Machine Learning</span>
+        <h3>NetalGuard</h3>
+        <p>A non-contact smart bassinet system for neonatal sepsis monitoring in underserved healthcare settings, built for the Gemastik IoT competition. Uses ballistocardiography (BCG) sensing combined with a multimodal cross-attention transformer to generate a real-time Sepsis Suspicion Risk Score.</p>
+        <div class="project-tools">
+          <span>IoT</span><span>Transformers</span><span>Signal Processing</span>
+        </div>
+      </div>
 
-		footer {
-			margin-top: 4rem;
-			text-align: center;
-			color: var(--nord3);
-			font-size: 0.875rem;
-			border-top: 1px solid var(--nord1);
-			padding-top: 1.5rem;
-		}
-		.image-container {
-			position: relative;
-			width: 300px;
-			height: 400px;
-			background-color: var(--card-bg);
-			border-radius: 16px;
-			box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-			overflow: hidden;
-			/* Smooth return transition when cursor leaves */
-			transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-			will-change: transform;
-		}
+      <div class="project-card reveal" style="--accent1:var(--nord9); --accent2:var(--nord7);">
+        <span class="project-tag" style="background:var(--nord9);">Robotics · SLAM</span>
+        <h3>FAST-LIVO2 Visual-Inertial Odometry</h3>
+        <p>Set up a LiDAR-Inertial-Visual Odometry pipeline on ROS2 using an Intel RealSense D455 camera for the visual and inertial estimation side — part of ongoing work toward robust real-time localization for competition robots.</p>
+        <div class="project-tools">
+          <span>ROS2</span><span>SLAM</span><span>RealSense D455</span>
+        </div>
+      </div>
 
-		.image-container img {
-			width: 100%;
-			height: 100%;
-			object-fit: cover;
-			pointer-events: none; /* Prevents image dragging glitches */
-		}
-		</style>
-	</head>
-	<body>
+      <div class="project-card reveal" style="--accent1:var(--nord13); --accent2:var(--nord12);">
+        <span class="project-tag" style="background:var(--nord13); color:var(--nord0);">Android · Kotlin</span>
+        <h3>Robocon Coordination App</h3>
+        <p>A Kotlin Android app for real-time robot state coordination during competition, parsing UDP telemetry into a live state-display grid. Debugged parsing and rendering issues in the preparation screen pipeline, from off-by-one errors to type mismatches under real-time constraints.</p>
+        <div class="project-tools">
+          <span>Kotlin</span><span>Android</span><span>UDP</span>
+        </div>
+      </div>
 
-		<div class="container">
-			<header>
-				<h1 id="greeting">Halo!</h1>
-				<p class="subtitle">Mahasiswa Rekayasa Perangkat Lunak ITS | Software Developer | Robotics Enthusiast</p>
-				<div class="image-container" id="magnetic-image">
-					<img src="../assets/gw-pas-masih-ganteng.jpg" alt="Avoidance Demo">
-				</div>
-			</header>
+    </div>
+  </section>
 
-			<section id="about">
-				<h2>Tentang Saya</h2>
-				<p>
-				Fokus pada pengembangan perangkat lunak, antarmuka web modern, dan sistem tertanam/robotika.
-				Aktif mengeksplorasi rekayasa perangkat lunak berorientasi objek serta perancangan sistem terstruktur.
-				</p>
-			</section>
+  <section id="skills">
+    <div class="section-title reveal"><span class="num">03</span><h2>Skills & Focus Areas</h2></div>
+    <div class="projects-grid">
+      <div class="project-card reveal" style="--accent1:var(--nord8);">
+        <h3>Robotics & Perception</h3>
+        <p>ROS2 architecture, sensor fusion (LiDAR/visual/inertial), object detection, Unity-based simulation and camera pipelines.</p>
+      </div>
+      <div class="project-card reveal" style="--accent1:var(--nord14);">
+        <h3>Mobile & App Development</h3>
+        <p>Native Android (Kotlin/Java), Jetpack Compose, real-time UDP/WebSocket data handling, DTO/codegen tooling.</p>
+      </div>
+      <div class="project-card reveal" style="--accent1:var(--nord15);">
+        <h3>Web & Systems</h3>
+        <p>Next.js + TypeScript, real-time sync architectures, database schema design (event-log/append-only patterns).</p>
+      </div>
+      <div class="project-card reveal" style="--accent1:var(--nord13);">
+        <h3>Algorithms & CP</h3>
+        <p>Backtracking, Heavy-Light Decomposition, segment trees, graph search — solved through structural analysis of the problem, not brute pattern matching.</p>
+      </div>
+    </div>
+  </section>
 
-			<section id="skills">
-				<h2>Keahlian</h2>
-				<div class="tags">
-					<span class="tag">Next.js / React</span>
-					<span class="tag">TypeScript / JavaScript</span>
-					<span class="tag">C# / .NET</span>
-					<span class="tag">Framer Motion</span>
-					<span class="tag">Tailwind CSS</span>
-					<span class="tag">OOP Design</span>
-					<span class="tag">Robotics</span>
-				</div>
-			</section>
+  <section id="contact">
+    <div class="contact-box reveal">
+      <h2>Let's build something.</h2>
+      <p>Open to collaboration on robotics, competitive engineering, and software projects. Reach out below.</p>
+      <div class="contact-links">
+        <a href="mailto:daffa.randika.3@gmail.com" class="btn btn-primary">Email Me</a>
+        <a href="https://github.com/daffarandika" class="btn btn-outline">GitHub</a>
+        <a href="https://www.linkedin.com/in/daffa-randika-b3b740244" class="btn btn-outline">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+</main>
 
-			<section id="projects">
-				<h2>Proyek Terpilih</h2>
-				<div class="projects-grid">
+<footer>
+  Built with love — <a href="#about">back to top</a>
+</footer>
 
-					<div class="card">
-						<h3>Course Scheduling System</h3>
-						<p>Sistem penjadwalan mata kuliah otomatis untuk Departemen Teknik Informatika ITS guna mengoptimalkan alokasi ruang dan waktu.</p>
-						<div class="tags">
-							<span class="tag">Web Dev</span>
-							<span class="tag">Algorithm</span>
-						</div>
-					</div>
+<script>
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const navMenu = document.getElementById('navMenu');
+  navToggle.addEventListener('click', () => navMenu.classList.toggle('open'));
+  navMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navMenu.classList.remove('open')));
 
-					<div class="card">
-						<h3>UI Components & Snap Scroll</h3>
-						<p>Eksperimen komponen antarmuka interaktif menggunakan Next.js, Framer Motion, dan DnD-kit untuk pengalaman pengguna yang intuitif.</p>
-						<div class="tags">
-							<span class="tag">Next.js</span>
-							<span class="tag">Framer Motion</span>
-						</div>
-					</div>
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => observer.observe(el));
+</script>
 
-					<div class="card">
-						<h3>Sistem Manajemen OOP (C#)</h3>
-						<p>Kumpulan aplikasi desktop berbasis OOP untuk pengelolaan inventaris buku, kendaraan, perangkat elektronik, dan peralatan olahraga.</p>
-						<div class="tags">
-							<span class="tag">C#</span>
-							<span class="tag">OOP</span>
-						</div>
-					</div>
-
-					<div class="card">
-						<h3>Kontes Robot ABU Indonesia</h3>
-						<p>Riset dan pengembangan sistem kontrol serta mekanik robot untuk kompetisi robotika tingkat nasional.</p>
-						<div class="tags">
-							<span class="tag">Robotics</span>
-							<span class="tag">Embedded Systems</span>
-						</div>
-					</div>
-
-				</div>
-			</section>
-
-			<section id="contact">
-				<h2>Kontak</h2>
-				<ul class="contact-list">
-					<li>Email: <a href="mailto:email@example.com">email@example.com</a></li>
-					<li>GitHub: <a href="https://github.com" target="_blank" rel="noopener">github.com</a></li>
-					<li>LinkedIn: <a href="https://linkedin.com" target="_blank" rel="noopener">linkedin.com</a></li>
-				</ul>
-			</section>
-
-			<footer>
-				<p>&copy; <span id="year"></span> Portofolio. Dibuat dengan tema Nord.</p>
-			</footer>
-		</div>
-
-		<script>
-			// Salam dinamis berdasarkan waktu
-			const hour = new Date().getHours();
-			const greetingEl = document.getElementById('greeting');
-
-			if (hour < 11) {
-				greetingEl.textContent = 'Selamat Pagi!';
-			} else if (hour < 15) {
-				greetingEl.textContent = 'Selamat Siang!';
-			} else if (hour < 18) {
-				greetingEl.textContent = 'Selamat Sore!';
-			} else {
-				greetingEl.textContent = 'Selamat Malam!';
-			}
-
-			// Tahun footer otomatis
-			document.getElementById('year').textContent = new Date().getFullYear();
-			const el = document.getElementById('magnetic-image');
-
-			// Configuration constants
-			const AVOID_RADIUS = 200; // How close the mouse needs to get (in pixels)
-			const PUSH_STRENGTH = 40;  // Maximum distance the image will move away (in pixels)
-
-			window.addEventListener('mousemove', (e) => {
-				// Get the bounding box of the image element
-				const rect = el.getBoundingClientRect();
-
-				// Calculate the center coordinates of the image
-				const elX = rect.left + rect.width / 2;
-				const elY = rect.top + rect.height / 2;
-
-				// Calculate distance between mouse and image center
-				const deltaX = e.clientX - elX;
-				const deltaY = e.clientY - elY;
-				const distance = Math.hypot(deltaX, deltaY);
-
-				// If mouse is within the avoidance radius
-				if (distance < AVOID_RADIUS) {
-					// Calculate the force based on how close the mouse is (closer = stronger push)
-					const force = (AVOID_RADIUS - distance) / AVOID_RADIUS;
-
-					// Calculate angle of movement
-					const angle = Math.atan2(deltaY, deltaX);
-
-					// Calculate the inverse (opposite) translation coordinates
-					const moveX = -Math.cos(angle) * force * PUSH_STRENGTH;
-					const moveY = -Math.sin(angle) * force * PUSH_STRENGTH;
-
-					// Temporarily disable the CSS transition for real-time tracking
-					el.style.transition = 'none';
-					el.style.transform = `translate(${moveX}px, ${moveY}px)`;
-				} else {
-					// Reset position and re-enable smooth spring back transition
-					el.style.transition = 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)';
-					el.style.transform = 'translate(0px, 0px)';
-				}
-			});
-		</script>
-	</body>
+</body>
 </html>

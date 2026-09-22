@@ -20,7 +20,7 @@ services:
       - portfolio
  
   portfolio:
-    image: sulthangamer123/porfolio-app
+    image: sulthangamer123/portfolio-app:latest
 
     container_name: portfolio
     restart: unless-stopped
