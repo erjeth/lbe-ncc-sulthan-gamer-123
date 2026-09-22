@@ -132,3 +132,14 @@ Kontainer dihidupkan kembali (`docker start portfolio`), Health Probe kembali be
 ![Failover Test Screenshot 2](docs/one-vm-down-curl-loop-output.jpeg)
 
 Screenshot diatas menunjukkan jika salah satu vm sudah mati, tetapi vm lain masih bisa diakses melalui Load Balancer.
+
+---
+
+**CI/CD Evidence – Docker Hub Push**
+![push portfolio-app](docs\portfolio-app.jpeg)
+
+![build-and-push-success](docs\Build_and_push_success.png)
+
+Screenshot diatas menunjukkan github action sudah berhasil push ke docker hub.
+
+---
