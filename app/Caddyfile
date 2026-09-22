@@ -1,0 +1,9 @@
+{
+    # Remove this global block once real certificates are issuing correctly.
+    # Staging certs are untrusted by browsers — this is for testing only.
+    acme_ca https://acme-staging-v02.api.letsencrypt.org/directory
+}
+
+sulthangamer123.run.place {
+    reverse_proxy portfolio:80
+}

@@ -1,16 +1,36 @@
 services:
-  app:
-    build: .
-    expose:
-      - "80"
-
-  nginx:
-    image: nginx:alpine
+  caddy:
+    image: caddy:alpine
+    container_name: caddy-proxy
+    restart: unless-stopped
     ports:
       - "80:80"
       - "443:443"
+      - "443:443/udp"   # HTTP/3
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./nginx/ssl:/etc/nginx/ssl:ro
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - webnet
     depends_on:
-      - app
+      - portfolio
+ 
+  portfolio:
+    image: sulthangamer123/porfolio-app:230b42fd86b6ca077bb77897a30ed57e83ec8dae
+
+    container_name: portfolio
+    restart: unless-stopped
+    expose:
+      - "80"
+    networks:
+      - webnet
+ 
+volumes:
+  caddy_data:
+  caddy_config:
+ 
+networks:
+  webnet:
+    driver: bridge
+ 
