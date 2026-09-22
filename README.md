@@ -136,9 +136,9 @@ Screenshot diatas menunjukkan jika salah satu vm sudah mati, tetapi vm lain masi
 ---
 
 **CI/CD Evidence – Docker Hub Push**
-![push portfolio-app](docs\portfolio-app.jpeg)
+![push portfolio-app](docs/portfolio-app.jpeg)
 
-![build-and-push-success](docs\Build_and_push_success.png)
+![build-and-push-success](docs/Build_and_push_success.png)
 
 Screenshot diatas menunjukkan github action sudah berhasil push ke docker hub.
 
