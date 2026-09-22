@@ -20,7 +20,7 @@ services:
       - portfolio
  
   portfolio:
-    image: sulthangamer123/porfolio-app:230b42fd86b6ca077bb77897a30ed57e83ec8dae
+    image: sulthangamer123/porfolio-app
 
     container_name: portfolio
     restart: unless-stopped
