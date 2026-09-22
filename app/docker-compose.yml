@@ -28,6 +28,8 @@ services:
       - "80"
     networks:
       - webnet
+    environment:
+      - MEMBER_NAME=${MEMBER_NAME}
  
 volumes:
   caddy_data:
