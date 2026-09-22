@@ -8,7 +8,7 @@ services:
       - "443:443"
       - "443:443/udp"   # HTTP/3
     volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./app/Caddyfile:/etc/caddy/Caddyfile:ro
       - caddy_data:/data
       - caddy_config:/config
     dns:
