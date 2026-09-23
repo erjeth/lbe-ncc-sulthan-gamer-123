@@ -113,8 +113,8 @@ docker load -i ~/caddy-image.tar
  
 Setiap VM menjalankan kontainer Caddy yang secara otomatis memperoleh dan mengelola sertifikat TLS dari Let's Encrypt untuk domain `sulthangamer123.run.place`. Karena 3 dari 4 VM tidak memiliki akses internet langsung, sertifikat diterbitkan satu kali di `vm-erzeth` (satu-satunya VM dengan akses publik), kemudian didistribusikan ke ketiga VM lainnya melalui jaringan privat Azure — sehingga seluruh VM dapat menyajikan HTTPS dengan sertifikat yang valid dan identik tanpa perlu masing-masing menghubungi Let's Encrypt sendiri.
  
+Di vm-erzeth, setelah sertifikat berhasil diterbitkan:
 ```bash
-# Di vm-erzeth, setelah sertifikat berhasil diterbitkan:
 sudo tar czf caddy-data.tar.gz -C /var/lib/docker/volumes/ /var/lib/docker/volumes/sulthan-gamer-123-lbe-final_caddy_data/_data .
 
 scp caddy-data.tar.gz daffa@10.0.1.4:~/
@@ -142,7 +142,7 @@ done
 ```
  
 ### Output Result
-![Curl Loop Terminal Screenshot](docs/healthy-curl-loop-output.jpeg)
+![Curl Loop Terminal Screenshot](docs/healthy-curl-loop-output.png)
 
 ---
  
@@ -158,8 +158,10 @@ docker compose stop caddy portfolio
 3. **Traffic Rerouting Verification:** Saat `curl loop` dijalankan kembali, Load Balancer berhasil mengalihkan seluruh lalu lintas hanya ke 3 VM yang masih sehat tanpa menyebabkan *downtime* pada pengguna.
 4. **Recovery Verification:** Kontainer dihidupkan kembali (`docker compose start caddy portfolio`), Health Probe kembali bernilai *Healthy*, dan lalu lintas otomatis terbagi kembali secara merata ke 4 VM.
 **Screenshot Failover Evidence:**
-![Failover Test Screenshot 1](docs/one-vm-down-backend-pool.jpeg)
-![Failover Test Screenshot 2](docs/one-vm-down-curl-loop-output.jpeg)
+
+![Failover Test Screenshot 1](docs/one-vm-down-backend-pool.png)
+
+![Failover Test Screenshot 2](docs/one-vm-down-curl-loop-output.png)
  
 ---
  
