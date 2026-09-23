@@ -39,25 +39,46 @@ Aplikasi menggunakan pendekatan **Unified Docker Image** yang dinamis untuk kont
  
 ```text
 .
-├── docker-compose.yml
-├── .env                          # berisi MEMBER_NAME, berbeda di tiap VM
-├── deploy.sh                     # script deploy: set MEMBER_NAME + docker compose up
 ├── app
-│   ├── Dockerfile
-│   ├── Caddyfile
-│   ├── entrypoint.sh
-│   └── src
-│       ├── daffa/...
-│       ├── dzakwan/...
-│       ├── erzeth/...
-│       └── sulthan/...
+│   ├── Caddyfile
+│   ├── deploy.sh
+│   ├── Dockerfile
+│   ├── .dockerignore
+│   ├── entrypoint.sh
+│   └── src
+│       ├── daffa
+│       │   └── src
+│       │       └── index.html
+│       ├── dzakwan
+│       │   └── src
+│       │       └── index.html
+│       ├── erzeth
+│       │   └── src
+│       │       ├── index.html
+│       │       ├── script.js
+│       │       └── style.css
+│       └── sulthan
+│           └── src
+│               └── index.html
+├── docker-compose.yml
 ├── docs
-│   ├── healthy-backend-pool.png          # ⚠️ perlu diganti
-│   ├── healthy-curl-loop-output.jpeg     # ⚠️ perlu diganti
-│   ├── one-vm-down-backend-pool.jpeg     # ⚠️ perlu diganti
-│   ├── one-vm-down-curl-loop-output.jpeg # ⚠️ perlu diganti
-│   ├── nsg-rule-443.png                  # 🆕 tambahkan
-│   └── caddy-cert-log.png                # 🆕 tambahkan
+│   ├── Build_and_push_success.png
+│   ├── healthy-backend-pool.png
+│   ├── healthy-curl-loop-output-.png
+│   ├── one-vm-down-backend-pool.png
+│   ├── one-vm-down-curl-loop-output.png
+│   └── portfolio-app.jpeg
+├── .env
+├── .github
+│   └── workflows
+│       └── docker-image.yml
+├── image-1.png
+├── image.png
+├── README.md
+└── website_qr.png
+
+13 directories, 24 files
+
 └── README.md
 ```
  
