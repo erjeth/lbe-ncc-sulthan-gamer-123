@@ -146,7 +146,6 @@ docker compose stop caddy portfolio
  
 ![push portfolio-app](docs/portfolio-app.jpeg)
 ![build-and-push-success](docs/Build_and_push_success.png)
----
  
 ##  Implementasi HTTPS
  
@@ -160,8 +159,7 @@ Beberapa pencapaian kunci dalam proses ini:
 - **Distribusi image secara offline** untuk VM tanpa akses internet berhasil diimplementasikan menggunakan `docker save`/`docker load`, memastikan seluruh VM menjalankan image yang identik tanpa memerlukan registry eksternal.
 - Sistem akhir terbukti **tangguh terhadap kegagalan VM** (dibuktikan lewat failover test) sekaligus **aman** (HTTPS end-to-end dengan sertifikat valid), mencerminkan praktik infrastruktur cloud yang production-grade meski dikerjakan dalam skala proyek pembelajaran.
 Hasil akhir: seluruh 4 VM kini menyajikan aplikasi portofolio tim melalui `https://sulthangamer123.run.place` dengan sertifikat TLS yang valid, terdistribusi merata oleh Azure Load Balancer, dan tetap tersedia bahkan ketika salah satu VM mengalami gangguan.
- 
----
+
  
 ## Panduan Troubleshooting
  
